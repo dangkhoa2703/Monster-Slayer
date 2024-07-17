@@ -15,9 +15,9 @@ const app = Vue.createApp({
       this.attackPlayer();
     },
     attackPlayer() {
-      this.monsterHealth -= getRandomValue(8, 15);
+      this.playerHealth -= getRandomValue(8, 15);
     },
   },
 });
 
-app.mount("#div");
+app.mount("#game");
