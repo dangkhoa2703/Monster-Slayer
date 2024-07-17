@@ -1,5 +1,5 @@
 const getRandomValue = (min, max) => {
-  return Math.floor(Math.random() * (min - max) + min);
+  return Math.floor(Math.random() * (max - min) + min);
 };
 
 const app = Vue.createApp({
@@ -9,10 +9,19 @@ const app = Vue.createApp({
       playerHealth: 100,
     };
   },
+  computed: {
+    monsterBarStyle() {
+      return { width: this.monsterHealth + "%" };
+    },
+    playerBarStyle() {
+      return { width: this.playerHealth + "%" };
+    },
+  },
   methods: {
     attackMonster() {
       this.monsterHealth -= getRandomValue(5, 12);
       this.attackPlayer();
+      console.log(`monster heatlh: ${this.monsterHealth}`);
     },
     attackPlayer() {
       this.playerHealth -= getRandomValue(8, 15);
