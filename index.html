@@ -19,13 +19,13 @@
     <section id="monster" class="container">
       <h2>Monster Health</h2>
       <div class="healthbar">
-        <div class="healthbar__value" :style="monsterBarStyle"></div>
+        <div class="healthbar__value" :style="monsterBarStyle">{{monsterHealth}}</div>
       </div>
     </section>
     <section id="player" class="container">
       <h2>Your Health</h2>
       <div class="healthbar">
-        <div class="healthbar__value" :style="playerBarStyle"></div>
+        <div class="healthbar__value" :style="playerBarStyle">{{playerHealth}}</div>
       </div>
     </section>
     <section v-if="winner" class="container">
@@ -43,7 +43,15 @@
     </section>
     <section id="log" class="container">
       <h2>Battle Log</h2>
-      <ul></ul>
+      <ul>
+        <li v-for="log in battleLogs">
+          <span
+            :class="{'log--player': log.actionBy === 'Player','log--monster': log.actionBy === 'Monster'}">{{log.actionBy
+            === 'Player' ? 'Player ' : 'Monster '}}</span>
+          <span v-if="log.action === 'heal'">heals him self <span class="log--heal">{{log.actionValue}}</span></span>
+          <span class="log-damage" v-else>attacks and deals <span class="log--damage">{{log.actionValue}}</span></span>
+        </li>
+      </ul>
     </section>
   </div>
 </body>
